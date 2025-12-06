@@ -1,0 +1,28 @@
+{
+  "name": "rfp-ai-backend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seed.js",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:generate": "prisma generate"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "imap-simple": "^5.0.0",
+    "mailparser": "^3.6.0",
+    "nodemailer": "^6.9.4",
+    "openai": "^4.104.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.22.0",
+    "nodemon": "^2.0.22",
+    "prisma": "^5.22.0"
+  }
+}
