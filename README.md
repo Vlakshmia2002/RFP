@@ -63,5 +63,72 @@ This implementation follows the assignment spec. :contentReference[oaicite:1]{in
 - UI polish and accessibility
 - Replace polling with webhook-based inbound email
 
+USER FLOW
+
+ ┌───────────────────┐
+ │       User         │
+ └───────┬───────────┘
+         │ Enters natural text
+         v
+ ┌────────────────────────────┐
+ │ Frontend (React + Vite)    │
+ └───────┬────────────────────┘
+         │ POST /generate
+         v
+ ┌────────────────────────────┐
+ │ Backend (Node.js + Express)│
+ └───────┬────────────────────┘
+         │ Sends RFP text
+         v
+ ┌────────────────────────────┐
+ │    DeepSeek AI Model       │
+ │ (Structure + Parsing + Eval)│
+ └───────┬────────────────────┘
+         │ JSON structured RFP
+         v
+ ┌────────────────────────────┐
+ │ PostgreSQL (via Prisma ORM)│
+ └───────┬────────────────────┘
+         │ Save RFP + Vendors + Proposals
+         v
+              ┌─────────────────────────────────────┐
+              │ Vendor Management (React Frontend)   │
+              └───────────┬─────────────────────────┘
+                          │ Send RFP emails (SMTP)
+                          v
+                     ┌─────────────┐
+                     │   Vendors    │
+                     └─────┬───────┘
+                           │ Reply via Email
+                           v
+                    ┌───────────────────────┐
+                    │   IMAP Listener       │
+                    │  (Auto fetch emails)  │
+                    └───────────┬──────────┘
+                                │ Raw email
+                                v
+                     ┌────────────────────────┐
+                     │ DeepSeek AI (Parsing)  │
+                     └───────────┬────────────┘
+                                 │ Parsed proposals
+                                 v
+                 ┌─────────────────────────────────┐
+                 │ PostgreSQL (Proposal Storage)    │
+                 └──────────────┬───────────────────┘
+                                │ Load proposals
+                                v
+                   ┌─────────────────────────────┐
+                   │ Comparison Dashboard (React) │
+                   └──────────────┬──────────────┘
+                                  │ AI Evaluation request
+                                  v
+                         ┌────────────────────┐
+                         │ DeepSeek AI Eval   │
+                         └────────────────────┘
+
+                        FINAL OUTPUT:
+            AI Recommendation + Comparison + Score Breakdown
+
+
 
 
