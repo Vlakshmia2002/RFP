@@ -1,5 +1,4 @@
 # AI-Powered RFP Management System (Assignment)
-1.Project Setup
 
 This repo is a complete single-user RFP management web app:
 - Backend: Node.js + Express + Prisma (Postgres)
